@@ -3,13 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>PopSE</title>
-  <link rel="stylesheet" href="./main.css">
+  <link rel="stylesheet" href="./app.css">
 </head>
 
 <body>
-  <button id="load-sound">Load Sound File</button>
-  <button id="play-sound">Play Sound</button>
+  <div class="app">
+    <div class="panel" id="js-panel">
+      <div class="panel-item js-panel-item">
+        <button class="button js-load-sound">音源の読み込み</button>
+        <button class="button js-play-sound">プレビュー</button>
+        <input class="input js-command" type="text" value="Command+Control+D">
+      </div>
+    </div>
+    <div class="control">
+      <button class="button" id="js-add">項目を増やす</button>
+      <button class="button" id="js-remove">項目を減らす</button>
+      <button class="button" id="js-save">コマンド適用</button>
+    </div>
+  </div>
 
-  <script src="./editor.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>
