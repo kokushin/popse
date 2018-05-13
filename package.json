@@ -1,0 +1,22 @@
+{
+  "name": "popse",
+  "version": "1.0.0",
+  "description": "好きなキーバインドで効果音を出せるApp",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://kokushin@github.com/kokushin/popse.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kokushin/popse/issues"
+  },
+  "homepage": "https://github.com/kokushin/popse#readme",
+  "devDependencies": {
+    "electron": "^2.0.0"
+  }
+}
