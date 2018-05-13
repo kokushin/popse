@@ -4,7 +4,9 @@
   "description": "好きなキーバインドで効果音を出せるApp",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron ./src",
+    "build-mac": "electron-packager ./src PopSE --platform=darwin --arch=x64 --overwrite",
+    "build-wimdows": "electron-packager ./src PopSE --platform=win32 --arch=x64 --overwrite"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,7 @@
   },
   "homepage": "https://github.com/kokushin/popse#readme",
   "devDependencies": {
-    "electron": "^2.0.0"
+    "electron": "^2.0.0",
+    "electron-packager": "^12.0.2"
   }
 }
