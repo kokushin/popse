@@ -1,0 +1,91 @@
+:root {
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.app {
+  background-color: #fafafa;
+  min-height: 100vh;
+  position: relative;
+}
+
+.button {
+  white-space: nowrap;
+  outline: transparent;
+  cursor: pointer;
+}
+
+.panel {
+  padding-bottom: 60px;
+}
+
+.panel-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.panel-item > * + * {
+  margin-left: 1rem;
+}
+
+.panel-item label > span {
+  font-size: .875rem;
+}
+
+.panel-item:before {
+  content: " ";
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #eee;
+  margin-right: 1rem;
+}
+
+.panel-item.is-loaded:before {
+  background-color: green;
+}
+
+.control {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  display: flex;
+  align-items: center;
+}
+
+.control .button {
+  border: 0;
+  margin: 0;
+  padding: .875rem 1rem;
+  background-color: #fff;
+}
+
+.control .button[id=js-add] {
+  flex: 0 0 25%;
+}
+
+.control .button[id=js-remove] {
+  flex: 0 0 25%;
+}
+
+.control .button[id=js-save] {
+  flex: 0 0 50%;
+}
+
+.control .button + .button {
+  border-left: 1px solid #eee;
+}
