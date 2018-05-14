@@ -5,6 +5,11 @@
 
 深夜テンションの状態かつ3時間ほどで作成したためMac以外のOSでの動作は保証はできません
 
+## ダウンロード
+
+- [Mac OS (46.3 MB)](https://github.com/kokushin/popse/releases/download/v0.1.0/PopSE-darwin-x64.zip) 
+- [Windows (48.4 MB)](https://github.com/kokushin/popse/releases/download/v0.1.0/PopSE-win32-x64.zip)
+
 ## 使い方
 
 1. PopSE.appをダウンロード
