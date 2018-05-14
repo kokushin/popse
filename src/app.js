@@ -1,7 +1,7 @@
-const { globalShortcut, BrowserWindow, dialog } = require('electron').remote;
-const fs = require('fs');
+const { globalShortcut, BrowserWindow, dialog } = require('electron').remote
+const fs = require('fs')
 
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
 
 class App {
   constructor () {
@@ -22,31 +22,31 @@ class App {
       index: 0,
     }
 
-    this.init();
+    this.init()
   }
 
   init () {
     this.$el.document.on('click', '.js-load-sound', (e) => {
-      this.setIndex($(e.currentTarget));
-      this.openLoadFile();
-    });
+      this.setIndex($(e.currentTarget))
+      this.openLoadFile()
+    })
 
     this.$el.document.on('click', '.js-play-sound', (e) => {
-      this.setIndex($(e.currentTarget));
-      this.playSound(this.state.index);
-    });
+      this.setIndex($(e.currentTarget))
+      this.playSound(this.state.index)
+    })
 
     this.$el.addBtn.on('click', () => {
-      this.addPanelItem();
-    });
+      this.addPanelItem()
+    })
 
     this.$el.removeBtn.on('click', () => {
-      this.removePanelItem();
-    });
+      this.removePanelItem()
+    })
 
     this.$el.saveBtn.on('click', () => {
-      this.applyCommand();
-    });
+      this.applyCommand()
+    })
   }
 
   addPanelItem () {
@@ -61,33 +61,33 @@ class App {
 
   removePanelItem () {
     if (this.$el.panel.children().length > 1) {
-      this.$el.panel.children().last().remove();
+      this.$el.panel.children().last().remove()
     }
   }
 
   applyCommand () {
     if (!this.state.loaded[0]) {
-      alert('エラー: 音声ファイルを読み込ませてください');
-      return;
+      alert('エラー: 音声ファイルを読み込ませてください')
+      return
     } else {
-      globalShortcut.unregisterAll();
+      globalShortcut.unregisterAll()
     }
 
-    const $panelItem = $('.js-panel-item');
+    const $panelItem = $('.js-panel-item')
 
     for (let i = 0; i < $panelItem.length; i++) {
-      const command = $panelItem.eq(i).find('.js-command')[0].value;
+      const command = $panelItem.eq(i).find('.js-command')[0].value
 
       globalShortcut.register(command, () => {
-        this.playSound(i);
-      });
+        this.playSound(i)
+      })
     }
 
-    alert('コマンドを適用しました');
+    alert('コマンドを適用しました')
   }
 
   openLoadFile () {
-    const win = BrowserWindow.getFocusedWindow();
+    const win = BrowserWindow.getFocusedWindow()
 
     dialog.showOpenDialog(
       win,
@@ -102,7 +102,7 @@ class App {
       },
       (fileNames) => {
         if (fileNames) {
-          this.readFile(fileNames[0]);
+          this.readFile(fileNames[0])
         }
       }
     )
@@ -111,61 +111,61 @@ class App {
   readFile (path) {
     fs.readFile(path, (error, data) => {
       if (error !== null) {
-        alert(`エラー: ${error}`);
-        return;
+        alert(`エラー: ${error}`)
+        return
       }
 
       audioCtx.decodeAudioData(this.arrayBuffer(data), (buffer) => {
         this.state.data[this.state.index] = {
           src: audioCtx.createBufferSource()
-        };
+        }
 
-        this.state.data[this.state.index].src.buffer = buffer;
-        this.state.data[this.state.index].src.connect(audioCtx.destination);
+        this.state.data[this.state.index].src.buffer = buffer
+        this.state.data[this.state.index].src.connect(audioCtx.destination)
 
-        this.state.loaded[this.state.index] = true;
+        this.state.loaded[this.state.index] = true
 
-        $('.js-panel-item').eq(this.state.index).addClass('is-loaded');
+        $('.js-panel-item').eq(this.state.index).addClass('is-loaded')
       })
     })
   }
 
   playSound (index) {
     if (!this.state.loaded[index]) {
-      alert('エラー: 音声ファイルを読み込ませてください');
-      return;
+      alert('エラー: 音声ファイルを読み込ませてください')
+      return
     }
 
     if (!this.state.played[index]) {
-      this.soundControls('play', index);
+      this.soundControls('play', index)
 
-      this.state.played[index] = true;
+      this.state.played[index] = true
     } else {
-      const currentBuffer = this.state.data[index].src.buffer;
+      const currentBuffer = this.state.data[index].src.buffer
 
-      this.state.data[index].src = audioCtx.createBufferSource();
-      this.state.data[index].src.buffer = currentBuffer;
-      this.state.data[index].src.connect(audioCtx.destination);
+      this.state.data[index].src = audioCtx.createBufferSource()
+      this.state.data[index].src.buffer = currentBuffer
+      this.state.data[index].src.connect(audioCtx.destination)
 
-      this.soundControls('play', index);
+      this.soundControls('play', index)
     }
   }
 
   soundControls (control, index) {
     switch (control) {
       case 'play':
-        this.state.data[index].src.start(0);
-        break;
+        this.state.data[index].src.start(0)
+        break
     }
   }
 
   setIndex($el) {
-    this.state.index = $el.closest('.panel-item').index();
+    this.state.index = $el.closest('.panel-item').index()
   }
 
   arrayBuffer (data) {
-    return data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
+    return data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength)
   }
 }
 
-new App();
+new App()
